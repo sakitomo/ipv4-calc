@@ -1,0 +1,35 @@
+body,input,button,.ui-btn,table {
+	font-size: large;
+	font-family: 'Courier New', monospace;
+}
+
+.ui-input-text input {
+	text-align: right;
+}
+
+.ui-field-contain>label {
+	min-width:11em;
+}
+
+.ui-field-contain .ui-controlgroup-label,.ui-field-contain .ui-controlgroup-controls {
+	width:auto;
+}
+
+.ui-content {
+	padding-top:0;
+	padding-bottom:0;
+}
+
+.fieldIP {
+	margin:0;
+	padding:0px;
+}
+
+.fieldIP .ui-controlgroup-label {
+	margin:0;
+}
+
+.fieldIP .ui-controlgroup-controls {
+	float:right;
+	min-width:15em;
+}
