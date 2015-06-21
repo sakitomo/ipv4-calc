@@ -4,8 +4,11 @@ $(document).on('pagecreate', '#home', function() {
 	var prefix;
 	var valid = true;
 
+
+	$.mobile.defaultPageTransition = 'none';
+
 	jQuery(function ($) {
-		$("#gen").click(function(){
+		$("#gen").tap(function(){
 			initialize();
 			generate();
 			$("#ver").button("enable").button("refresh");
@@ -13,7 +16,7 @@ $(document).on('pagecreate', '#home', function() {
 				$("#gen").button("disable").button("refresh");
 			}
 		});
-		$("#ver").click(function(){
+		$("#ver").tap(function(){
 			verify();
 			validate_gen();
 		});
@@ -142,6 +145,4 @@ $(document).on('pagecreate', '#home', function() {
 
 		$("#nwBottom").height(8);
 	}
-
-
 });
