@@ -25,18 +25,11 @@ $(document).on('pagecreate', '#home', function() {
 		verify();
 		validate_gen();
 	});
-	$cellsIP.each(function(i) {
-		$(this).tap(function(e){
-			$cellsNW.eq(i).click();
-			return false;
-		});
-	});
 	$cellsNW.each(function(i) {
 		$(this).click(function(e){
 			if ( $("#help_mode").prop("checked") ) {
 				switch_cell(i);
 			}
-			return false;
 		});
 	});
 	$("#divClass input").click(function(){
