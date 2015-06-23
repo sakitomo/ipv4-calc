@@ -29,7 +29,10 @@ $(document).on('pagecreate', '#home', function() {
 			if ( $("#help_mode").prop("checked") ) {
 				switch_cell(i);
 			}
+			$(this).click();
+			e.preventDefault();
 			e.stopPropagation();
+			return false;
 		});
 	});
 	$("#divClass input").click(function(){
