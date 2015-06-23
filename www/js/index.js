@@ -24,14 +24,18 @@ $(document).on('pagecreate', '#home', function() {
 		verify();
 		validate_gen();
 	});
-	$cellsNW.each(function(i) {
+	$("#rowIP input").each(function(i) {
 		$(this).tap(function(e){
+			$cellsNW.eq(i).click();
+			return false;
+		});
+	});
+	$cellsNW.each(function(i) {
+		$(this).click(function(e){
 			if ( $("#help_mode").prop("checked") ) {
 				switch_cell(i);
 			}
 			$(this).click();
-			e.preventDefault();
-			e.stopPropagation();
 			return false;
 		});
 	});
