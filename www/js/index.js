@@ -7,37 +7,40 @@ $(document).on('pagecreate', '#home', function() {
 
 	$.mobile.defaultPageTransition = 'none';
 
-	jQuery(function ($) {
-		$("#gen").tap(function(){
-			initialize();
-			generate();
-			$("#ver").button("enable").button("refresh");
-			if ( $("#step_mode").prop("checked") ) {
-				$("#gen").button("disable").button("refresh");
+	var $cellsNW = $("#rowNW input");
+	var $cellsRS = $("#rowRS span");
+	var $classChkd = $("#divClass input:checked");
+
+	$("#gen").tap(function(){
+		initialize();
+		generate();
+		$("#ver").button("enable").button("refresh");
+		if ( $("#step_mode").prop("checked") ) {
+			$("#gen").button("disable").button("refresh");
+		}
+		return false;
+	});
+	$("#ver").click(function(){
+		verify();
+		validate_gen();
+	});
+	$cellsNW.each(function(i) {
+		$(this).click(function(){
+			if ( $("#help_mode").prop("checked") ) {
+				switch_cell(i);
 			}
 		});
-		$("#ver").tap(function(){
-			verify();
-			validate_gen();
-		});
-		$("input[name=nw]").each(function (i) {
-			$(this).click(function(){
-				if ( $("#help_mode").prop("checked") ) {
-					switch_cell($(this).attr("id").slice(-1));
-				}
-			});
-		});
-		$("input[name=class]").click(function(){
-			validate_gen();
-		});
-		$("#step_mode").change(function(){
-			validate_gen();
-		});
+	});
+	$("#divClass input").click(function(){
+		validate_gen();
+	});
+	$("#step_mode").change(function(){
+		validate_gen();
 	});
 
 
 	function validate_gen() {
-		if ( $("input[name=class]:checked").length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
+		if ( $classChkd.length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
 			$("#gen").button("enable").button("refresh");
 		} else {
 			$("#gen").button("disable").button("refresh");
@@ -50,9 +53,7 @@ $(document).on('pagecreate', '#home', function() {
 		var min, max;
 		var i;
 
-		switch ( $("input[name=class]:checked").eq( 
-			Math.floor( Math.random() * $("input[name=class]:checked").length ) 
-		).val() ) {
+		switch ( $classChkd.eq( Math.floor( Math.random() * $classChkd.length ) ).val() ) {
 		case 'A':
 			ip_bits = '00001010';  // 10
 			min = 8;
@@ -106,11 +107,11 @@ $(document).on('pagecreate', '#home', function() {
 
 
 	function generate() {
-		$("input[name=nw]").val("");
-		$("span[name=rs]").html("");
-		$("#nwBottom").height(0);
+		$cellsNW.val("");
+		$cellsRS.html("");
+		$("#rowBottom").height(0);
 
-		$("input[name=ip]").each(function (i) {
+		$("#rowIP input").each(function(i) {
 			$(this).val(ip_addr[i]);
 		});
 		if (prefix < 10) {
@@ -122,27 +123,27 @@ $(document).on('pagecreate', '#home', function() {
 
 
 	function switch_cell(octet) {
-		$("input[name=nw]:lt("+octet+")").each(function (i) {
+		$cellsNW.filter(":lt("+octet+")").each(function(i) {
 			$(this).val(ip_addr[i]);
 		});
-		$("input[name=nw]:eq("+octet+")").val("");
-		$("input[name=nw]:gt("+octet+")").val(0x00);
+		$cellsNW.eq(octet).val("");
+		$cellsNW.filter(":gt("+octet+")").val(0x00);
 	}
 
 
 	function verify() {
 		var count = 0;
 
-		$("input[name=nw]").each(function (i) {
+		$cellsNW.each(function(i) {
 			if ( nw_addr[i].toString() == $(this).val() ) {
-				$("#rs"+i).html("&#10004;").css("color","green");
+				$cellsRS.eq(i).html("&#10004;").css("color","green");
 			} else {
-				$("#rs"+i).html("&#10005;").css("color","red");
+				$cellsRS.eq(i).html("&#10005;").css("color","red");
 				count++;
 			}
 		});
 		valid = count == 0;
 
-		$("#nwBottom").height(8);
+		$("#rowBottom").height(8);
 	}
 });

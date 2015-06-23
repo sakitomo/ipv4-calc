@@ -9,9 +9,9 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 
-<SCRIPT type="text/javascript" charset="utf-8" src="js/jquery-1.11.2.min.js"></SCRIPT>
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.5.min.js"></script>
-<SCRIPT type="text/javascript" charset="utf-8" src="js/index.js"></SCRIPT>
+<script type="text/javascript" charset="utf-8" src="js/index.js"></script>
 
 </HEAD>
 
@@ -22,20 +22,19 @@
 		<h1>IPv4 Calc</h1>
 	</div> 
 	<div role="main" class="ui-content">
-		<FORM>
-		      <input type="button" id="gen" value="Generate" class="ui-btn">
+		<input type="button" id="gen" value="Generate" class="ui-btn">
 		<div class="ui-field-contain fieldIP"> 
 		<fieldset data-role="controlgroup">
 			<legend>Host IP Address:</legend>
 			<TABLE cellspacing="0" cellpadding="0" align="right">
-			  <TR>
-			    <TD><input type="tel" id="ip0" name="ip" value="" size="3" readonly></TD>
+			  <TR id="rowIP">
+			    <TD><input type="tel" value="" size="3" readonly></TD>
 			    <TD>.</TD>
-			    <TD><input type="tel" id="ip1" name="ip" value="" size="3" readonly></TD>
+			    <TD><input type="tel" value="" size="3" readonly></TD>
 			    <TD>.</TD>
-			    <TD><input type="tel" id="ip2" name="ip" value="" size="3" readonly></TD>
+			    <TD><input type="tel" value="" size="3" readonly></TD>
 			    <TD>.</TD>
-			    <TD><input type="tel" id="ip3" name="ip" value="" size="3" readonly></TD>
+			    <TD><input type="tel" value="" size="3" readonly></TD>
 			    <TD>/<SPAN id="pre">&#160;&#160;</SPAN></TD>
 			  </TR>
 			</TABLE>
@@ -46,32 +45,32 @@
 		<fieldset data-role="controlgroup">
 			<legend>Network Address:</legend>
 			<TABLE cellspacing="0" cellpadding="0" align="right">
-			  <TR>
-			    <TD><input type="tel" id="nw0" name="nw" value="" size="3"></TD>
+			  <TR id="rowNW">
+			    <TD><input type="tel" value="" size="3"></TD>
 			    <TD>.</TD>
-			    <TD><input type="tel" id="nw1" name="nw" value="" size="3"></TD>
+			    <TD><input type="tel" value="" size="3"></TD>
 			    <TD>.</TD>
-			    <TD><input type="tel" id="nw2" name="nw" value="" size="3"></TD>
+			    <TD><input type="tel" value="" size="3"></TD>
 			    <TD>.</TD>
-			    <TD><input type="tel" id="nw3" name="nw" value="" size="3"></TD>
+			    <TD><input type="tel" value="" size="3"></TD>
 			    <TD>&#160;&#160;&#160;</TD>
 			  </TR>
-			  <TR align="center">
-			    <TD><SPAN id="rs0" name="rs"></SPAN></TD>
+			  <TR id="rowRS" align="center">
+			    <TD><SPAN></SPAN></TD>
 			    <TD></TD>
-			    <TD><SPAN id="rs1" name="rs"></SPAN></TD>
+			    <TD><SPAN></SPAN></TD>
 			    <TD></TD>
-			    <TD><SPAN id="rs2" name="rs"></SPAN></TD>
+			    <TD><SPAN></SPAN></TD>
 			    <TD></TD>
-			    <TD><SPAN id="rs3" name="rs"></SPAN></TD>
+			    <TD><SPAN></SPAN></TD>
 			    <TD></TD>
 			  </TR>
-			  <TR id="nwBottom" rowspan="8"></TR>
+			  <TR id="rowBottom" rowspan="8"></TR>
 			</TABLE>
 		</fieldset>
 		</div> 
-		      <input type="button" id="ver" value="Verify" disabled>
-	</FORM></div>
+		<input type="button" id="ver" value="Verify" disabled>
+	</div>
 	<div data-role="footer" data-position="fixed" data-theme="b" class="ui-bar"> 
 		<a href="#cfg" class="ui-btn ui-btn-icon-left ui-icon-gear ui-corner-all">Config</a>
 	</div> 
@@ -83,28 +82,26 @@
 		<h1>Config</h1> 
 	</div> 
 	<div role="main" class="ui-content">
-		<FORM>
-		<div class="ui-field-contain"> 
+		<div id="divClass" class="ui-field-contain"> 
 		<fieldset data-role="controlgroup" data-type="horizontal">
 			<legend>Class:</legend>
-			<INPUT type="checkbox" id="classA" name="class" value="A" checked><label for="classA">A</label>
-			<INPUT type="checkbox" id="classB" name="class" value="B" checked><label for="classB">B</label>
-			<INPUT type="checkbox" id="classC" name="class" value="C" checked><label for="classC">C</label>
+			<input type="checkbox" id="classA" value="A" checked><label for="classA">A</label>
+			<input type="checkbox" id="classB" value="B" checked><label for="classB">B</label>
+			<input type="checkbox" id="classC" value="C" checked><label for="classC">C</label>
 		</fieldset>
 		</div>
 		<div class="ui-field-contain"> 
 			<label for="hard_mode">Exclude prefix 8, 16, 24:</label>
-			<INPUT type="checkbox" id="hard_mode" value="1" data-role="flipswitch" checked>
+			<input type="checkbox" id="hard_mode" value="1" data-role="flipswitch" checked>
 		</div>
 		<div class="ui-field-contain"> 
 			<label for="help_mode">Auto fill inactive cells:</label>
-			<INPUT type="checkbox" id="help_mode" value="1" data-role="flipswitch" checked>
+			<input type="checkbox" id="help_mode" value="1" data-role="flipswitch" checked>
 		</div>
 		<div class="ui-field-contain"> 
-			<label for="hard_mode">Allow Generate only when solved:</label>
-			<INPUT type="checkbox" id="step_mode" value="1" data-role="flipswitch" checked>
+			<label for="step_mode">Allow Generate only when solved:</label>
+			<input type="checkbox" id="step_mode" value="1" data-role="flipswitch" checked>
 		</div>
-		</FORM>
 	</div>
 </div>
 
