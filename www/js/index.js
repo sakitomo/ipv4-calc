@@ -7,6 +7,7 @@ $(document).on('pagecreate', '#home', function() {
 
 	$.mobile.defaultPageTransition = 'none';
 
+	var $cellsIP = $("#rowIP input");
 	var $cellsNW = $("#rowNW input");
 	var $cellsRS = $("#rowRS span");
 	var $classChkd = $("#divClass input:checked");
@@ -24,7 +25,7 @@ $(document).on('pagecreate', '#home', function() {
 		verify();
 		validate_gen();
 	});
-	$("#rowIP input").each(function(i) {
+	$cellsIP.each(function(i) {
 		$(this).tap(function(e){
 			$cellsNW.eq(i).click();
 			return false;
@@ -35,7 +36,6 @@ $(document).on('pagecreate', '#home', function() {
 			if ( $("#help_mode").prop("checked") ) {
 				switch_cell(i);
 			}
-			$(this).click();
 			return false;
 		});
 	});
@@ -119,7 +119,7 @@ $(document).on('pagecreate', '#home', function() {
 		$cellsRS.html("");
 		$("#rowBottom").height(0);
 
-		$("#rowIP input").each(function(i) {
+		$cellsIP.each(function(i) {
 			$(this).val(ip_addr[i]);
 		});
 		if (prefix < 10) {
