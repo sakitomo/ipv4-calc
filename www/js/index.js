@@ -14,9 +14,9 @@ $(document).on('pagecreate', '#home', function() {
 	$("#gen").tap(function(){
 		initialize();
 		generate();
-		$("#ver").button("enable").button("refresh");
+		$("#ver").removeClass("ui-state-disabled");
 		if ( $("#step_mode").prop("checked") ) {
-			$("#gen").button("disable").button("refresh");
+			$("#gen").addClass("ui-state-disabled");
 		}
 		return false;
 	});
@@ -25,10 +25,11 @@ $(document).on('pagecreate', '#home', function() {
 		validate_gen();
 	});
 	$cellsNW.each(function(i) {
-		$(this).click(function(){
+		$(this).tap(function(e){
 			if ( $("#help_mode").prop("checked") ) {
 				switch_cell(i);
 			}
+			e.stopPropagation();
 		});
 	});
 	$("#divClass input").click(function(){
@@ -41,9 +42,9 @@ $(document).on('pagecreate', '#home', function() {
 
 	function validate_gen() {
 		if ( $classChkd.length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
-			$("#gen").button("enable").button("refresh");
+			$("#gen").removeClass("ui-state-disabled");
 		} else {
-			$("#gen").button("disable").button("refresh");
+			$("#gen").addClass("ui-state-disabled");
 		}
 	}
 
