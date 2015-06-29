@@ -10,23 +10,22 @@ $(document).on('pagecreate', '#home', function() {
 	var $cellsIP = $("#rowIP input");
 	var $cellsNW = $("#rowNW input");
 	var $cellsRS = $("#rowRS span");
-	var $classChkd = $("#divClass input:checked");
 
-	$("#gen").tap(function(){
+	$("#gen").tap(function(e){
 		initialize();
 		generate();
 		$("#ver").removeClass("ui-state-disabled");
 		if ( $("#step_mode").prop("checked") ) {
 			$("#gen").addClass("ui-state-disabled");
 		}
-		return false;
+		e.preventDefault();
 	});
 	$("#ver").click(function(){
 		verify();
 		validate_gen();
 	});
 	$cellsNW.each(function(i) {
-		$(this).click(function(e){
+		$(this).click(function(){
 			if ( $("#help_mode").prop("checked") ) {
 				switch_cell(i);
 			}
@@ -41,7 +40,7 @@ $(document).on('pagecreate', '#home', function() {
 
 
 	function validate_gen() {
-		if ( $classChkd.length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
+		if ( $("#divClass input:checked").length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
 			$("#gen").removeClass("ui-state-disabled");
 		} else {
 			$("#gen").addClass("ui-state-disabled");
@@ -54,6 +53,7 @@ $(document).on('pagecreate', '#home', function() {
 		var min, max;
 		var i;
 
+		var $classChkd = $("#divClass input:checked");
 		switch ( $classChkd.eq( Math.floor( Math.random() * $classChkd.length ) ).val() ) {
 		case 'A':
 			ip_bits = '00001010';  // 10
@@ -72,7 +72,7 @@ $(document).on('pagecreate', '#home', function() {
 
 		do {
 			prefix = random_range(min, max);
-		} while ( $("#hard_mode").prop("checked") == true 
+		} while ( $("#hard_mode").prop("checked") 
 			&& (prefix == 24 || prefix == 16 || prefix == 8) );
 
 		ip_bits += random_bits(8, prefix);
