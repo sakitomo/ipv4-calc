@@ -19,5 +19,6 @@
 	<gap:platform name="android" />
 
 	<preference name="orientation" value="portrait" />
+	<preference name="permissions" value="none" />
 
 </widget>

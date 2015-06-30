@@ -1,11 +1,14 @@
-$(document).on('pagecreate', '#home', function() {
+$(document).on('mobileinit', function() {
+	$.mobile.defaultPageTransition = 'none';
+});
+
+
+$(function() {
 	var ip_addr = new Array(4);
 	var nw_addr = new Array(4);
 	var prefix;
 	var valid = true;
 
-
-	$.mobile.defaultPageTransition = 'none';
 
 	var $cellsIP = $("#rowIP input");
 	var $cellsNW = $("#rowNW input");
