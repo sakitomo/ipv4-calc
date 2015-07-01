@@ -3,20 +3,12 @@ $(document).on('mobileinit', function() {
 });
 
 
-$(function() {
-	var ip_addr = new Array(4);
-	var nw_addr = new Array(4);
-	var prefix;
-	var valid = true;
-
-
-	var $cellsIP = $("#rowIP input");
-	var $cellsNW = $("#rowNW input");
-	var $cellsRS = $("#rowRS span");
+$(document).on('pagecreate', '#home', function() {
+	IPv4.set_selectors();
 
 	$("#gen").tap(function(e){
-		initialize();
-		generate();
+		IPv4.initialize();
+		IPv4.generate();
 		$("#ver").removeClass("ui-state-disabled");
 		if ( $("#step_mode").prop("checked") ) {
 			$("#gen").addClass("ui-state-disabled");
@@ -24,34 +16,42 @@ $(function() {
 		e.preventDefault();
 	});
 	$("#ver").click(function(){
-		verify();
-		validate_gen();
+		IPv4.verify();
+		IPv4.validate_gen();
 	});
-	$cellsNW.each(function(i) {
+	IPv4.$cellsNW.each(function(i) {
 		$(this).click(function(){
 			if ( $("#help_mode").prop("checked") ) {
-				switch_cell(i);
+				IPv4.switch_cell(i);
 			}
 		});
 	});
 	$("#divClass input").click(function(){
-		validate_gen();
+		IPv4.validate_gen();
 	});
 	$("#step_mode").change(function(){
-		validate_gen();
+		IPv4.validate_gen();
 	});
+});
 
 
-	function validate_gen() {
-		if ( $("#divClass input:checked").length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
-			$("#gen").removeClass("ui-state-disabled");
-		} else {
-			$("#gen").addClass("ui-state-disabled");
-		}
-	}
+var IPv4 = (function() {
+	var my = {};
+
+	var ip_addr = new Array(4);
+	var nw_addr = new Array(4);
+	var prefix;
+	var valid = true;
 
 
-	function initialize() {
+	my.set_selectors = function () {
+		my.$cellsIP = $("#rowIP input");
+		my.$cellsNW = $("#rowNW input");
+		my.$cellsRS = $("#rowRS span");
+	};
+
+
+	my.initialize = function () {
 		var ip_bits, ip_host, sb_mask;
 		var min, max;
 		var i;
@@ -92,14 +92,14 @@ $(function() {
 		}
 
 		valid = false;
-	}
+	};
 
 
-	function random_range(min, max) {
+	var random_range = function (min, max) {
 		return Math.floor( Math.random() * (max-min+1) + min );
-	}
+	};
 
-	function random_bits(min, max) {
+	var random_bits = function (min, max) {
 		var str = '';
 		var i;
 
@@ -107,15 +107,15 @@ $(function() {
 			str += Math.floor( Math.random() * 2 );
 		}
 		return str;
-	}
+	};
 
 
-	function generate() {
-		$cellsNW.val("");
-		$cellsRS.html("");
+	my.generate = function () {
+		my.$cellsNW.val("");
+		my.$cellsRS.html("");
 		$("#rowBottom").height(0);
 
-		$cellsIP.each(function(i) {
+		my.$cellsIP.each(function(i) {
 			$(this).val(ip_addr[i]);
 		});
 		if (prefix < 10) {
@@ -123,31 +123,43 @@ $(function() {
 		} else {
 			$("#pre").html(prefix);
 		}
-	}
+	};
 
 
-	function switch_cell(octet) {
-		$cellsNW.filter(":lt("+octet+")").each(function(i) {
+	my.switch_cell = function (octet) {
+		my.$cellsNW.filter(":lt("+octet+")").each(function(i) {
 			$(this).val(ip_addr[i]);
 		});
-		$cellsNW.eq(octet).val("");
-		$cellsNW.filter(":gt("+octet+")").val(0x00);
-	}
+		my.$cellsNW.eq(octet).val("");
+		my.$cellsNW.filter(":gt("+octet+")").val(0x00);
+	};
 
 
-	function verify() {
+	my.verify = function () {
 		var count = 0;
 
-		$cellsNW.each(function(i) {
+		my.$cellsNW.each(function(i) {
 			if ( nw_addr[i].toString() == $(this).val() ) {
-				$cellsRS.eq(i).html("&#10004;").css("color","green");
+				my.$cellsRS.eq(i).html("&#10004;").css("color","green");
 			} else {
-				$cellsRS.eq(i).html("&#10005;").css("color","red");
+				my.$cellsRS.eq(i).html("&#10005;").css("color","red");
 				count++;
 			}
 		});
 		valid = count == 0;
 
 		$("#rowBottom").height(8);
-	}
-});
+	};
+
+
+	my.validate_gen = function () {
+		if ( $("#divClass input:checked").length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
+			$("#gen").removeClass("ui-state-disabled");
+		} else {
+			$("#gen").addClass("ui-state-disabled");
+		}
+	};
+
+
+	return my;
+}());
