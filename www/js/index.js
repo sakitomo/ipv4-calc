@@ -52,33 +52,26 @@ var IPv4 = (function() {
 
 
 	my.initialize = function () {
-		var ip_bits, ip_host, sb_mask;
-		var min, max;
-		var i;
+		var Class = function(min, bits) {
+			this.min = min;
+			this.bits = bits;
+		};
+		var classes = {
+			A: new Class( 8, '00001010'), //  10
+			B: new Class(12, '10101100'), // 172
+			C: new Class(16, '11000000')  // 192
+		};
 
 		var $classChkd = $("#divClass input:checked");
-		switch ( $classChkd.eq( Math.floor( Math.random() * $classChkd.length ) ).val() ) {
-		case 'A':
-			ip_bits = '00001010';  // 10
-			min = 8;
-			break;
-		case 'B':
-			ip_bits = '10101100';  // 172
-			min = 12;
-			break;
-		case 'C':
-			ip_bits = '11000000';  // 192
-			min = 16;
-			break;
-		}
-		max = 30;
+		var cls = classes[ $classChkd.eq( Math.floor( Math.random() * $classChkd.length ) ).val() ];
+		var ip_bits, ip_host, sb_mask;
+		var i;
 
 		do {
-			prefix = random_range(min, max);
-		} while ( $("#hard_mode").prop("checked") 
-			&& (prefix == 24 || prefix == 16 || prefix == 8) );
+			prefix = random_range(cls.min, 30);
+		} while ( $("#hard_mode").prop("checked") && (prefix == 24 || prefix == 16 || prefix == 8) );
+		ip_bits = cls.bits + random_bits(8, prefix);
 
-		ip_bits += random_bits(8, prefix);
 		do {
 			ip_host = random_bits(prefix, 32);
 		} while ( ip_host.match(/^(0+|1+)$/) );  // The host part is not allowed to be "all 0s" nor "all 1s".
@@ -131,7 +124,7 @@ var IPv4 = (function() {
 			$(this).val(ip_addr[i]);
 		});
 		my.$cellsNW.eq(octet).val("");
-		my.$cellsNW.filter(":gt("+octet+")").val(0x00);
+		my.$cellsNW.filter(":gt("+octet+")").val(0);
 	};
 
 
