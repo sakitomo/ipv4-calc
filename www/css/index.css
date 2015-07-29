@@ -1,6 +1,17 @@
-body,input,button,.ui-btn,table {
-	font-size: large;
+*,.ui-btn,input[type="tel"] {
 	font-family: 'Courier New', monospace;
+}
+
+input[type="tel"],.digit,.action {
+	font-size: large;
+}
+
+.ui-header .ui-title {
+	font-size: large;
+}
+
+.ui-footer {
+	padding: 0em .4em;
 }
 
 .ui-input-text input {
@@ -20,16 +31,16 @@ body,input,button,.ui-btn,table {
 	padding-bottom:0;
 }
 
-.fieldIP {
+.address {
 	margin:0;
 	padding:0px;
 }
 
-.fieldIP .ui-controlgroup-label {
+.address .ui-controlgroup-label {
 	margin:0;
 }
 
-.fieldIP .ui-controlgroup-controls {
+.address .ui-controlgroup-controls {
 	float:right;
 	min-width:15em;
 }

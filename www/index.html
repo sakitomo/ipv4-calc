@@ -22,8 +22,8 @@
 		<h1>IPv4 Calc</h1>
 	</div> 
 	<div role="main" class="ui-content">
-		<button id="gen" class="ui-btn ui-corner-all">Generate</button>
-		<div class="ui-field-contain fieldIP"> 
+		<button id="gen" class="ui-btn ui-corner-all action">Generate</button>
+		<div class="ui-field-contain address"> 
 			<fieldset data-role="controlgroup">
 				<legend>Host IP Address:</legend>
 				<TABLE cellspacing="0" cellpadding="0">
@@ -35,13 +35,13 @@
 				    <TD><input type="tel" value="" size="3" readonly></TD>
 				    <TD>.</TD>
 				    <TD><input type="tel" value="" size="3" readonly></TD>
-				    <TD>/<SPAN id="pre">&#160;&#160;</SPAN></TD>
+				    <TD>/<SPAN id="pre" class="digit">&#160;&#160;</SPAN></TD>
 				  </TR>
 				</TABLE>
 			</fieldset>
 		</div> 
 		<div style="height:8px;"></div> 
-		<div class="ui-field-contain fieldIP"> 
+		<div class="ui-field-contain address"> 
 			<fieldset data-role="controlgroup">
 				<legend>Network Address:</legend>
 				<TABLE cellspacing="0" cellpadding="0">
@@ -69,9 +69,9 @@
 				</TABLE>
 			</fieldset>
 		</div> 
-		<button id="ver" class="ui-btn ui-corner-all ui-state-disabled">Verify</button>
+		<button id="ver" class="ui-btn ui-corner-all ui-state-disabled action">Verify</button>
 	</div>
-	<div data-role="footer" data-position="fixed" data-theme="b" class="ui-bar"> 
+	<div data-role="footer" data-position="fixed" data-theme="b"> 
 		<a href="#cfg" class="ui-btn ui-btn-icon-left ui-icon-gear ui-corner-all">Config</a>
 	</div> 
 </div>

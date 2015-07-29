@@ -3,8 +3,8 @@
 		xmlns:gap   = "http://phonegap.com/ns/1.0"
 		xmlns:android   = "http://schemas.android.com/apk/res/android"
 		id          = "com.sakitomo.IPv4Calc"
-		versionCode = "125"
-		version     = "2.2.4" >
+		versionCode = "126"
+		version     = "2.3.0" >
 
 	<name>IPv4Calc</name>
 
