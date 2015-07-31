@@ -8,6 +8,7 @@ input[type="tel"],.digit,.action {
 
 .ui-header .ui-title {
 	font-size: large;
+	line-height: 1;
 }
 
 .ui-footer {
@@ -33,7 +34,7 @@ input[type="tel"],.digit,.action {
 
 .address {
 	margin:0;
-	padding:0px;
+	padding:0;
 }
 
 .address .ui-controlgroup-label {
