@@ -51,6 +51,15 @@ var IPv4 = (function() {
 	};
 
 
+	my.validate_gen = function () {
+		if ( $("#divClass input:checked").length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
+			$("#gen").removeClass("ui-state-disabled");
+		} else {
+			$("#gen").addClass("ui-state-disabled");
+		}
+	};
+
+
 	my.initialize = function () {
 		var Class = function(min, bits) {
 			this.min = min;
@@ -129,28 +138,19 @@ var IPv4 = (function() {
 
 
 	my.verify = function () {
-		var count = 0;
+		var error = 0;
 
 		my.$cellsNW.each(function(i) {
 			if ( nw_addr[i].toString() == $(this).val() ) {
 				my.$cellsRS.eq(i).html("&#10004;").css("color","green");
 			} else {
-				my.$cellsRS.eq(i).html("&#10005;").css("color","red");
-				count++;
+				my.$cellsRS.eq(i).html("&#10006;").css("color","red");
+				error++;
 			}
 		});
-		valid = count == 0;
+		valid = error == 0;
 
 		$("#rowBottom").height(8);
-	};
-
-
-	my.validate_gen = function () {
-		if ( $("#divClass input:checked").length > 0 && ( valid || !$("#step_mode").prop("checked") ) ) {
-			$("#gen").removeClass("ui-state-disabled");
-		} else {
-			$("#gen").addClass("ui-state-disabled");
-		}
 	};
 
 
